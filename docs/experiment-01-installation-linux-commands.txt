@@ -1,0 +1,194 @@
+exp 1,2,3,4,5,7,10,12
+
+                21CSC202J – OPERATING SYSTEMS LAB
+
+
+
+  Ex. No. 1      OS INSTALLATION PROCEDURE                                  Date:
+
+AIM:
+To install the Operating System.
+
+Ubuntu Installation
+
+ 1.  Download the ISO → Go to ubuntu.com → Download, and choose an LTS release.
+ 2.  Create a bootable USB → Use Rufus (Windows) or balenaEtcher (Windows/macOS/Linux) to write the ISO
+     to a USB drive.
+ 3.  Boot from USB → Restart the PC, enter BIOS/UEFI (F2/Del/F12 depending on the vendor), and set the USB
+     drive as the first boot device.
+
+Ubuntu Installation Steps
+ 4.  Select your language and click “Install Ubuntu.”
+ 5.  Choose Wi-Fi and third-party software options, then “Continue.”
+ 6.  Choose installation type: “Erase disk and install Ubuntu” (simple, wipes the disk) or “Something else” (manual
+     partitioning).
+ 7.   Click “Install Now” to confirm partitioning.
+ 8.  Select your location and keyboard layout.
+ 9.  Enter your name, computer name, username, and password.
+ 10. Wait for installation to finish, then remove the USB and restart.
+ 11. Log in with your password at the Ubuntu login screen.
+
+Windows Installation
+
+Download the Windows ISO from microsoft.com, create bootable media with the Media Creation Tool or Rufus,
+boot from USB, and follow the on-screen setup (language → partition selection → install → account creation).
+
+
+
+
+
+Result:
+
+Thus Ubuntu is successfully installed.
+
+Ex. No. 1B      BASIC LINUX COMMANDS                                      Date:
+
+AIM:
+To Understand the basic Linux Commands.
+
+(a) Basics
+
+ 12. echo SRM → display the string SRM
+ 13. clear → clear the screen
+ 14. date → display the current date and time
+ 15. cal 2003 → display the calendar for the year 2003
+ 16. cal 6 2003 → display the calendar for June 2003
+
+     Tip: On a minimal Ubuntu Server install, cal may not be preinstalled. Install it with: sudo apt install ncal
+
+ 17. passwd → change the current user's password
+ 18. man <command> → open the manual page for a command (e.g. man ls) — the best way to look up options
+     yourself
+ 19. history → show previously run commands
+ 20. whoami → show the current logged-in username
+
+(b) Working with Files
+
+ 21. ls →  list files in the present working directory
+ 22. ls -l →  list files with detailed information (long listing)
+ 23. ls -a →  list all files, including hidden files
+ 24. cat > f1 → create a file f1 and type content into it (press Ctrl+D to finish)
+ 25. cat f1 → display the content of file f1
+ 26. wc f1 →  list the number of lines, words, and characters of file f1
+ 27. wc -c f1 →  list only the number of characters
+ 28. wc -w f1 →  list only the number of words
+ 29. wc -l f1 →  list only the number of lines
+ 30. cp f1 f2 → copy file f1 to f2
+ 31. mv f1 f2 → rename file f1 to f2
+ 32. rm f1 → remove file f1
+ 33. head -5 f1 →  list the first 5 lines of file f1
+ 34. tail -5 f1 →  list the last 5 lines of file f1
+
+(c) Working with Directories
+
+ 35. mkdir elias → create a directory named elias
+ 36. cd elias → change into the elias directory
+ 37. rmdir elias → remove the empty directory elias
+ 38. pwd → display the path of the current working directory
+ 39. cd → go to the home directory
+ 40. cd .. → go to the parent directory
+ 41. cd - → go to the previous working directory
+ 42. cd / → go to the root directory
+
+(d) Filename Substitution (Globbing)
+
+ 43. ls f? →  list files starting with f and followed by exactly one character
+ 44. ls *.c →  list files with the .c extension
+ 45. ls [gpy]et →  list files starting with g, p, or y and followed by et
+ 46. ls [a-d,l-m]ring →  list files starting with a–d or l–m and followed by ring
+
+(e) I/O Redirection
+
+Input redirection
+ 47. wc -l < f1 → count the number of lines in f1, reading it as input
+
+Output redirection
+ 48. who > f2 → redirect the output of who into file f2 (overwrites f2)
+ 49. cat >> f1 → append more text to the end of file f1
+
+(f) Piping
+
+Syntax: command1 | command2 — the output of command1 becomes the input of command2.
+
+ 50. cat f1 | more → display the contents of f1 one screen at a time
+ 51. head -6 f1 | tail -2 → show lines 5 and 6 of file f1
+
+(g) Environment Variables
+
+ 52. echo $HOME → display the path of the home directory
+ 53. echo $PS1 → display the primary prompt string
+ 54. echo $PS2 → display the secondary prompt string (> by default)
+ 55. echo $LOGNAME → display the login name
+ 56. echo $PATH →  list the directories the shell searches for executables
+
+(h) File Permissions — chmod
+
+Method 1: Symbolic mode
+
+Syntax: chmod [ugo][+/-][rwx] filename  (u = user, g = group, o = others; + adds, – removes a permission)
+
+ 57. chmod ug+rw f1 → add read & write permission for the user and group on f1
+
+Method 2: Octal mode
+
+Syntax: chmod NNN filename — each digit is the sum of 4 (read) + 2 (write) + 1 (execute), for user / group /
+others respectively.
+
+ 58. chmod 754 f1 → user: rwx (7), group: r-x (5), others: r-- (4)
+
+     Tip: Use ls -l f1 afterwards to see the resulting permission string (e.g. -rwxr-xr--) and confirm it matches what you set.
+
+
+Result: The above commands were executed and verified.
+
+Ex. No. 1C       FILTERS AND ADMIN COMMANDS                               Date:
+
+
+
+Filters
+
+1. cut — extract characters or fields
+
+Syntax: cut -c chars filename |  cut -f fieldnos filename
+
+Tab is the default field separator. Use -d to specify a different delimiter:
+
+ 59. cut -d delimchar -f fields filename
+
+     Tip: Example: cut -d',' -f1,3 data.csv prints fields 1 and 3 of a comma-separated file.
+
+2. grep — search for a pattern
+
+Syntax: grep pattern filename(s) — prints lines containing the pattern (a regular expression); can search multiple
+files.
+
+ 60. grep -v pattern f1 → display lines that do NOT contain the pattern
+ 61. grep -l pattern *.txt →  list only the names of files that contain the pattern
+ 62. grep -n pattern f1 → show matching lines with their line numbers
+
+3. sort — sort file contents
+
+Syntax: sort filename — sorts as text, by the first field, by default.
+
+ 63. sort -r f1 → sort in descending order
+ 64. sort -u f1 → sort and eliminate duplicate lines
+ 65. sort -o out.txt f1 → write sorted output to out.txt instead of the screen
+ 66. sort -t: -k2 f1 → sort by the 2nd field, using : as the field separator
+ 67. sort -n f1 → sort numerically instead of as text
+ 68. sort -k2n f1 → skip sorting by field 1; sort numerically by field 2
+
+4. uniq — report or remove duplicate lines
+
+Syntax: uniq filename — works on adjacent duplicate lines, so the input should already be sorted.
+
+ 69. uniq -d f1 → display only the duplicate lines
+ 70. uniq -c f1 → prefix each unique line with its count of occurrences
+
+5. diff — compare two files
+
+Syntax: diff f1 f2 — shows the lines that differ between f1 and f2.
+
+ 71. diff -u f1 f2 → show differences in unified format (the style used by patches and git diff, easier to read)
+
+
+Result: The above commands were executed and verified.
